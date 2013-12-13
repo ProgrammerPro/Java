@@ -1,0 +1,11 @@
+public static void InsertionSort (double [] list){
+	for (int i = 1; i < list.length;  i++){
+		double CurrentElement = list[i];
+		int k;
+		for (int k = i - 1; k >= 0 && list [k] > CurrentElement; k--){
+			list[k + 1] = list[k];
+		}
+		
+		list [k + 1] = CurrentElement;
+	}
+}
