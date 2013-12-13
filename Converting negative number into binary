@@ -1,0 +1,123 @@
+import java.util.*;
+import java.lang.StringBuilder;
+import java.math.*;
+import java.lang.String;
+public class NumberToBinary {
+	public static void main (String [] args){
+		Scanner input = new Scanner (System.in);
+		System.out.println("Enter a number to be converted to binary! (negative or positive) ");
+		int number = input.nextInt();
+		int num;
+		String remainder = "";
+		if (number > 0){ // If a positive number was entered !
+		while (number != 0){
+			if (number % 2 == 0){
+				num = number / 2;
+				number = num;
+				remainder = remainder + "0";
+			}
+			else{
+				num = number / 2;
+				number = num;
+				remainder = remainder + "1";
+			}
+		}
+		String S2 = "";
+		for (int i = remainder.length()-1; i >= 0; i--){
+			S2 = S2 + remainder.charAt(i);
+		}
+		System.out.print("The Binary value is: " + S2);
+	}
+	else if (number < 0){ // if a negative number was entered!
+		int positive = (int)(Math.abs(number));
+		while (positive != 0){
+			if (positive % 2 == 0){
+				num = positive / 2;
+				positive = num;
+				remainder = remainder + "0";
+			}
+			else{
+				num = positive / 2;
+				positive = num;
+				remainder = remainder + "1";
+			}
+		}
+		String S3 = "";
+		String S4 = ""; // has the final negative number flipped
+		for (int i = remainder.length()-1; i >= 0; i--){
+			S3 = S3 + remainder.charAt(i);
+		}
+		for (int j = remainder.length()-1; j >= 0; j--){
+			if(remainder.charAt(j) == '0'){
+				S4 = S4 + '1';
+			}
+			else{
+				S4 = S4 + '0';
+			}
+		}
+		char [] negativeBinary = new char[remainder.length()] ;
+		for (int B = 0; B < remainder.length(); B++){
+			negativeBinary[B] = '0';		
+		}
+		int n = negativeBinary.length-1;
+		negativeBinary[n] = '1';
+		String S5 = new String (negativeBinary); // S5 has the binary value
+		System.out.print(Add(S4, S5));
+		}
+	}
+	public static String Add (String Str1, String Str2){
+		String carry = "0";
+		String Results = "";
+		String final_Results = "";
+		char temp1;
+		char temp2;
+		for (int i = Str1.length()-1; i >= 0; i--){
+			temp1 = Str1.charAt(i);
+			temp2 = Str2.charAt(i);
+			if((temp1 == '0') && (temp2 == '0')){
+				if (carry == "0"){
+				Results = Results + "0";
+				carry = "0";
+				}
+				else{
+					Results = Results + "1";
+					carry = "0";
+				}
+			}
+			else if ((temp1 == '0') && (temp2 == '1')){
+				if (carry == "0"){
+				Results = Results + "1";
+				carry = "0";
+				}
+				else{
+					Results = Results + "0";
+					carry = "1";
+				}
+			}
+			else if ((temp1 == '1') && (temp2 == '0')){
+				if (carry == "0"){
+					Results = Results + "1";
+					carry = "0";
+				}
+				else{
+					Results = Results + "0";
+					carry = "1";
+				}
+			}
+			else if ((temp1 == '1') && (temp2 == '1')){
+				if (carry == "0"){
+				Results = Results + "0";
+				carry = "1";
+				}
+				else{
+					Results = Results + "1";
+					carry = "1";
+				}
+			}
+		}
+		for (int k = Results.length()-1; k >= 0; k--){
+			final_Results = final_Results + Results.charAt(k);
+		}
+		return (final_Results + " with: " + carry + " carry");
+	}
+}
