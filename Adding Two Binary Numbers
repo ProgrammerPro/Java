@@ -1,0 +1,67 @@
+import java.util.*;
+import java.lang.String;
+public class AddingBinary {
+	public static void main (String [] args){
+		Scanner input = new Scanner(System.in);
+		System.out.println("Enter first binary number: ");
+		String S1 = input.next();
+		System.out.println("Enter second binary number: ");
+		String S2 = input.next();
+		System.out.print("Adding these 2 numbers will return a results of : " + Add(S1,S2));
+	}
+	public static String Add (String Str1, String Str2){
+		String carry = "0";
+		String Results = "";
+		String final_Results = "";
+		char temp1;
+		char temp2;
+		for (int i = Str1.length()-1; i >= 0; i--){
+			temp1 = Str1.charAt(i);
+			temp2 = Str2.charAt(i);
+			if((temp1 == '0') && (temp2 == '0')){
+				if (carry == "0"){
+				Results = Results + "0";
+				carry = "0";
+				}
+				else{
+					Results = Results + "1";
+					carry = "0";
+				}
+			}
+			else if ((temp1 == '0') && (temp2 == '1')){
+				if (carry == "0"){
+				Results = Results + "1";
+				carry = "0";
+				}
+				else{
+					Results = Results + "0";
+					carry = "1";
+				}
+			}
+			else if ((temp1 == '1') && (temp2 == '0')){
+				if (carry == "0"){
+					Results = Results + "1";
+					carry = "0";
+				}
+				else{
+					Results = Results + "0";
+					carry = "1";
+				}
+			}
+			else if ((temp1 == '1') && (temp2 == '1')){
+				if (carry == "0"){
+				Results = Results + "0";
+				carry = "1";
+				}
+				else{
+					Results = Results + "1";
+					carry = "1";
+				}
+			}
+		}
+		for (int k = Results.length()-1; k >= 0; k--){
+			final_Results = final_Results + Results.charAt(k);
+		}
+		return (final_Results + " with: " + carry + " carry");
+	}
+}
