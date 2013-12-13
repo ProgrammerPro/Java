@@ -1,0 +1,76 @@
+	public static String BinaryToLetter (String S3){
+		String Results = "";
+		int number = BinaryToNumber(S3);
+		switch(number){
+		case 0:
+			Results = "0";
+			break;
+		case 1:
+			Results = "1";
+			break;
+		case 2:
+			Results = "2";
+			break;
+		case 3:
+			Results = "3";
+			break;
+		case 4:
+			Results = "4";
+			break;
+		case 5: 
+			Results = "5";
+			break;
+		case 6:
+			Results = "6";
+			break;
+		case 7:
+			Results = "7";
+			break;
+		case 8:
+			Results = "8";
+			break;
+		case 9:
+			Results = "9";
+			break;
+		case 10:
+			Results = "A";
+			break;
+		case 11:
+			Results = "B";
+			break;
+		case 12:
+			Results = "C";
+			break;
+		case 13:
+			Results = "D";
+			break;
+		case 14:
+			Results = "E";
+			break;
+		case 15:
+			Results = "F";
+			break;
+		default: 
+				Results = "Error Binary number is not valid Hex!";
+		}
+		return Results;
+	}
+	public static String BinaryToHex (String S2){
+		String Results = "";
+		while(S2.length() != 0){
+			String S1 = "";
+			int counter = 0;
+			if (S2.length() % 2 == 0){
+				for(counter = 0; counter <= 3; counter++){
+					S1 = S1 + S2.charAt(counter);
+				}
+				S2 = S2.substring(counter);
+				Results = Results + BinaryToLetter(S1);
+			}
+			else{
+				Results = "Error, The binary number is incomplete!";
+				break;
+			}
+		}
+		return Results;
+	}
