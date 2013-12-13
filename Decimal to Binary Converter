@@ -1,0 +1,54 @@
+import java.util.*;
+import java.lang.String;
+public class DecimalToBinary {
+	public static void main (String [] args){
+		Scanner input = new Scanner (System.in);
+		System.out.println("Enter a decimal number: ");
+		double decimal = input.nextDouble();
+		System.out.println("the Value in binary is: " + Left_Side(decimal) + "." + Right_Side(decimal));
+	}
+	public static String Right_Side (double Numba){
+		int counter = 0;
+		int num1 = (int)(Numba);
+		double num2 = Numba - num1;
+		String S1 = "";
+		while (num2 != 0.0){
+			if ((num2 * 2) < 1.00){
+				S1 = S1 + "0";
+				num2 = num2 * 2;
+				counter++;
+			}
+			if (num2 * 2 >= 1.00){
+				S1 = S1 + "1";
+				num2 = num2 * 2;
+				counter++;
+			}
+			if (counter >= 8)
+				break;
+		}
+		return S1;
+	}
+	public static String Left_Side (double Numba){
+		int Number = (int)(Numba);
+		String Remainder = "";
+		int number;
+		while(Number != 0){
+			if (Number % 2 == 0){
+				number = Number / 2;
+				Number = number;
+				Remainder = Remainder + "0";
+			}
+			else {
+				number = Number / 2;
+				Number = number;
+				Remainder = Remainder + "1";
+			}
+		}
+		String Reverse = "";
+		for (int i = Remainder.length()-1; i >= 0; i--){
+			Reverse = Reverse + Remainder.charAt(i);
+		}
+		return Reverse;
+	}
+
+}
