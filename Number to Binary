@@ -1,0 +1,21 @@
+	public static String NumberToBinary(int num){
+		String Remainder = "";
+		int number;
+		while(num != 0){
+			if (num % 2 == 0){
+				number = num / 2;
+				num = number;
+				Remainder = Remainder + "0";
+			}
+			else {
+				number = num / 2;
+				num = number;
+				Remainder = Remainder + "1";
+			}
+		}
+		String Reverse = "";
+		for (int i = Remainder.length()-1; i >= 0; i--){
+			Reverse = Reverse + Remainder.charAt(i);
+		}
+		return Reverse;
+	}
