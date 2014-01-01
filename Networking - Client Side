@@ -1,0 +1,61 @@
+import java.io.*;
+import java.net.*;
+import java.util.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class Client extends JFrame {
+
+	private JTextField jtf = new JTextField();
+	private JTextArea jta = new JTextArea();
+	private DataOutputStream toServer;
+	private DataInputStream fromServer;
+	
+	public static void main (String [] args){
+		new Client();
+	}
+	
+	public Client(){
+		JPanel p = new JPanel();
+		p.setLayout(new BorderLayout());
+		p.add(new JLabel("Type your message:"), BorderLayout.WEST);
+		p.add(jtf, BorderLayout.CENTER);
+		jtf.setHorizontalAlignment(JTextField.RIGHT);
+		
+		setLayout(new BorderLayout());
+		add(p, BorderLayout.NORTH);
+		add(new JScrollPane(jta), BorderLayout.CENTER);
+		
+		jtf.addActionListener(new TextFieldListener());
+		
+		setTitle("Client1");
+		setSize(500, 300);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
+		
+		try{
+			Socket socket = new Socket("localhost", 8000);
+			fromServer = new DataInputStream(socket.getInputStream());
+			toServer = new DataOutputStream(socket.getOutputStream());
+		}
+		catch (IOException ex){
+			jta.append(ex.toString() + '\n');
+		}
+	}
+	
+	private class TextFieldListener implements ActionListener {
+		public void actionPerformed (ActionEvent e){
+			try {
+				String msg = jtf.getText().trim();
+				toServer.writeUTF(msg + "\n");
+				toServer.flush();
+				String msg1 = fromServer.readUTF();
+				jta.append("Client1 Says: " + msg1 + "\n");
+			}
+			catch (IOException ex){
+				System.err.println(ex);
+			}
+		}
+	}
+}
