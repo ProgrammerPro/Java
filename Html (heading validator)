@@ -1,0 +1,47 @@
+	//<h1>This is a heading</h1>
+	public static boolean isValidHeading (String Html){
+		String StartTag = "";
+		String EndTag = "";
+		boolean validTag = false;
+		boolean validHeading = false;
+		
+		for (int i = 0; i < Html.length(); i++){
+			
+			if ((Html.charAt(i) == '<') && (Html.charAt(i + 1) != '/')){
+				int index1 = i + 1;
+				while(Html.charAt(index1) != '>'){
+					StartTag = StartTag + Html.charAt(index1);
+					index1++;
+				}
+			}
+			if ((Html.charAt(i) == '<') && (Html.charAt(i + 1) == '/')){
+				int index2 = i + 2;
+				while(Html.charAt(index2) != '>'){
+					EndTag = EndTag + Html.charAt(index2);
+					index2++;
+				}
+			}
+		}
+		
+		if (StartTag.equals(EndTag)){
+			validTag = true;
+		}
+		else {
+			validTag = false;
+		}
+		
+		if (((StartTag.charAt(0) == 'h') || (StartTag.charAt(0) == 'H')) && (Character.isDigit(StartTag.charAt(1)))){
+			validHeading = true;
+		}
+		else {
+			validHeading = false;
+		}
+		
+		if (validTag && validHeading){
+			return true;
+		}
+		else {
+			return false;
+		}
+
+	}
